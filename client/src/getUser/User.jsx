@@ -22,7 +22,7 @@ const User = () => {
 
   return (
     <div className='userTable'>
-      <Link to="/add" type="button" class="btn btn-primary">Añadir usuario <i class="fa-solid fa-user-plus"></i></Link>
+      <Link to="/addNewUser" type="button" class="btn btn-primary">Añadir usuario <i class="fa-solid fa-user-plus"></i></Link>
       <table className='table table-bordered'>
         <thead>
           <tr>
