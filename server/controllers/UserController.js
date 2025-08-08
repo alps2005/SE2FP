@@ -12,7 +12,7 @@ export const createUsr = async (req, res) => {
         }
 
         const svdData = await newUser.save();
-        res.status(200).json({message: `Nuevo usuario: ${svdData.name} fue creado exitosamente!`});
+        res.status(200).json({message: `El usuario ${svdData.name} fue creado exitosamente!`});
 
     } catch (err) {
         res.status(500).json({ errorMessage: err.message });
@@ -66,7 +66,11 @@ export const updateUsr = async(req, res) => {
             new:true
         })
 
-        res.status(200).json(updatedUsr);
+        //res.status(200).json(updatedUsr);
+        res.status(200).json({message: `Usuario actualizado correctamente!`});
+        // El usuario ${usrFound.name} fue actualizado a ${updatedUsr.name}. 
+        //     El correo del usuario ${usrFound.name} fue actualizado a ${updatedUsr.email}. 
+        //     La dirección del usuario ${usrFound.name} fue actualizada a ${updatedUsr.address}.
 
     } catch (error) {
         res.status(500).json({ errorMessage: error.message });
@@ -84,7 +88,7 @@ export const deleteUsr = async(req, res) => {
         }
 
         await User.findByIdAndDelete(idReq);
-        res.status(200).json({ message: "Usuario elminado exitosamente."})
+        res.status(200).json({ message: `Usuario ${usrFound.name} elminado exitosamente.`})
 
     } catch (error) {
         res.status(500).json({ errorMessage: error.message });
