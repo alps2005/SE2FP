@@ -1,15 +1,24 @@
 import User from "../models/userModel.js";
+import bcrypt from "bcrypt";
 
 export const createUsr = async (req, res) => {
     try {
-
-        const newUser = new User(req.body);
-        const {email} = req.body;
+        const { email, password, ...otherData } = req.body;
 
         const usrExists = await User.findOne({email});
         if(usrExists){
             return res.status(400).json({ message: "El usuario ya existe." })
         }
+
+        // Hash the password before saving
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+        const newUser = new User({
+            ...otherData,
+            email,
+            password: hashedPassword
+        });
 
         const svdData = await newUser.save();
         res.status(200).json({message: `El usuario ${svdData.name} fue creado exitosamente!`});
@@ -21,7 +30,6 @@ export const createUsr = async (req, res) => {
 
 export const getAllUsrs = async(req, res) => {
     try {
-
         const usrData = await User.find();
 
         if(!usrData || usrData.length === 0){
@@ -37,7 +45,6 @@ export const getAllUsrs = async(req, res) => {
 
 export const getUsrById = async(req, res) => {
     try {
-
         const idReq = req.params.id;
         const usrFound = await User.findById(idReq);
 
@@ -54,7 +61,6 @@ export const getUsrById = async(req, res) => {
 
 export const updateUsr = async(req, res) => {
     try {
-
         const idReq = req.params.id;
         const usrFound = await User.findById(idReq);
 
@@ -62,15 +68,17 @@ export const updateUsr = async(req, res) => {
             return res.status(404).json({message: "Usuario no existente."});
         }
 
-        const updatedUsr = await User.findByIdAndUpdate(idReq, req.body, {
-            new:true
-        })
+        // If password is being updated, hash it
+        if (req.body.password) {
+            const saltRounds = 10;
+            req.body.password = await bcrypt.hash(req.body.password, saltRounds);
+        }
 
-        //res.status(200).json(updatedUsr);
+        const updatedUsr = await User.findByIdAndUpdate(idReq, req.body, {
+            new: true
+        });
+
         res.status(200).json({message: `Usuario actualizado correctamente!`});
-        // El usuario ${usrFound.name} fue actualizado a ${updatedUsr.name}. 
-        //     El correo del usuario ${usrFound.name} fue actualizado a ${updatedUsr.email}. 
-        //     La dirección del usuario ${usrFound.name} fue actualizada a ${updatedUsr.address}.
 
     } catch (error) {
         res.status(500).json({ errorMessage: error.message });
@@ -79,7 +87,6 @@ export const updateUsr = async(req, res) => {
 
 export const deleteUsr = async(req, res) => {
     try {
-
         const idReq = req.params.id;
         const usrFound = await User.findById(idReq);
 
@@ -88,9 +95,55 @@ export const deleteUsr = async(req, res) => {
         }
 
         await User.findByIdAndDelete(idReq);
-        res.status(200).json({ message: `Usuario ${usrFound.name} elminado exitosamente.`})
+        res.status(200).json({ message: `Usuario ${usrFound.name} eliminado exitosamente.`})
 
     } catch (error) {
+        res.status(500).json({ errorMessage: error.message });
+    }
+}
+
+export const userLogin = async(req, res) => {
+    try {
+        console.log('Login request received');
+        console.log('Request body:', req.body);
+        console.log('Request headers:', req.headers);
+        
+        const { email, password } = req.body;
+
+        if (!email || !password) {
+            console.log('Missing email or password');
+            return res.status(400).json({ message: "Email y contraseña son requeridos." });
+        }
+
+        console.log('Looking for user with email:', email);
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            console.log('User not found');
+            return res.status(401).json({ message: "Credenciales inválidas." });
+        }
+
+        console.log('User found, checking password');
+        // Compare password with hashed password
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+
+        if (!isPasswordValid) {
+            console.log('Password invalid');
+            return res.status(401).json({ message: "Credenciales inválidas." });
+        }
+
+        console.log('Login successful');
+        res.status(200).json({ 
+            message: "Login exitoso.",
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email
+            }
+        });
+
+    } catch (error) {
+        console.error('Login error:', error);
         res.status(500).json({ errorMessage: error.message });
     }
 }

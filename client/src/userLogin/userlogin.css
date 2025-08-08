@@ -1,0 +1,52 @@
+.userLogin {
+    width: 30%;
+    margin: 50px auto;
+    display: block;
+    backdrop-filter: blur(35px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.065);
+}
+
+.addLoginForm .inputGroup {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.addLoginForm .inputGroup label {
+    margin-top: 15px;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+}
+
+.addLoginForm .inputGroup input {
+    margin-bottom: 5px;
+    border-radius: 10px;
+    border-color: rgba(255, 255, 255, 0.4);
+    padding: 10px;
+}
+
+.addLoginForm .inputGroup button {
+    margin-top: 30px;
+}
+
+.addLogin h3 {
+    margin-top: 5px;
+    text-align: center;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    text-transform: uppercase;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.btn {
+    margin-top: 30px;
+    border-width: 2px;
+}
+
+.logo {
+    align-items: center;
+    width: 150%;
+}

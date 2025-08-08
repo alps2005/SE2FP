@@ -11,7 +11,7 @@ const User = () => {
     const fetchData = async() =>{
       try {
         
-        const res = await axios.get('http://localhost:8000/api/getAllUsrs');
+        const res = await axios.get('http://localhost:8000/api/users/getAllUsrs');
         setUsers(res.data)
 
       } catch (error) {
@@ -33,10 +33,10 @@ const User = () => {
       });
   }
 
-
   return (
     <div className='userTable'>
       <Link to="/addNewUser" type="button" class="btn btn-success">Agregar usuario <i class="fa-solid fa-user-plus"></i></Link>
+      <Link to="/login" type="button" class="btn btnexit btn-outline-danger">Salir <i class="fa-solid fa-user-plus"></i></Link>
       
       {users.length === 0?(
         <div className='noData'>

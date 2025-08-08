@@ -3,6 +3,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
 import User from './getUser/User';
 import UpdateUser from './updateUser/UpdateUser';
+import UserLogin from './userLogin/UserLogin';
+import UserSignin from './userSignin/UserSignin';
 
 function App() {
   const route = createBrowserRouter([
@@ -17,6 +19,14 @@ function App() {
     {
       path: "/updateUser/:id",
       element: <UpdateUser/>,
+    },
+    {
+      path: "/login",
+      element: <UserLogin/>,
+    },
+    {
+      path: "/register", // This should match the Link in UserLogin
+      element: <UserSignin/>,
     },
   ])
   return (

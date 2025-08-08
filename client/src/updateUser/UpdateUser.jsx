@@ -25,7 +25,7 @@ const UpdateUser = () => {
   };
   
   useEffect(()=>{
-    axios.get(`http://localhost:8000/api/getUsrById/${id}`).then((res)=>{
+    axios.get(`http://localhost:8000/api/users/getUsrById/${id}`).then((res)=>{
       setUser(res.data);
     }).catch((err)=>{
       console.log(err);
@@ -35,7 +35,7 @@ const UpdateUser = () => {
 
   const submitForm = async(e) => {
     e.preventDefault();
-    await axios.put(`http://localhost:8000/api/updateUsr/${id}`, user).then((response)=>{toast.success(response.data.message, { position: "top-right" })
+    await axios.put(`http://localhost:8000/api/users/updateUsr/${id}`, user).then((response)=>{toast.success(response.data.message, { position: "top-right" })
 
     navigate("/");
 
@@ -73,7 +73,7 @@ const UpdateUser = () => {
               />
             </div>
             <div className="inputGroup">
-              <label htmlFor="email">Correo electronico:</label>
+              <label htmlFor="stateId">Cedula:</label>
               <input
                 type="text"
                 id="stateId"
@@ -81,7 +81,7 @@ const UpdateUser = () => {
                 onChange={inputHandler}
                 name="stateId"
                 autoComplete="off"
-                placeholder="Enter your Email"
+                placeholder="xxxxxxx987"
               />
             </div>
             <div className="inputGroup">

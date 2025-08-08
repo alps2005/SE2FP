@@ -24,15 +24,21 @@ const AddUser = () => {
   }
 
   const submitForm = async(e) => {
-
     e.preventDefault();
-    await axios.post("http://localhost:8000/api/createUsr", user).then((res)=>{toast.success(res.data.message, { position: "top-right" })
+    
+    // Check if any field is empty
+    if (!user.name.trim() || !user.email.trim() || !user.stateId.trim() || !user.address.trim()) {
+      toast.error("Todos los campos son obligatorios!", { position: "top-right" });
+      return;
+    }
 
-    navigate("/");
-
-  }).catch((error)=>{
+    await axios.post("http://localhost:8000/api/users/createUsr", user).then((res)=>{
+      toast.success(res.data.message, { position: "top-right" });
+      navigate("/");
+    }).catch((error)=>{
       console.log(error);
-    })
+      toast.error("Error al crear usuario", { position: "top-right" });
+    });
   }
 
     return (
@@ -59,6 +65,17 @@ const AddUser = () => {
                 name="email"
                 autoComplete="off"
                 placeholder="nombre@ejemplo.com"
+              />
+            </div>
+            <div className="inputGroup">
+              <label htmlFor="password">Contraseña:</label>
+              <input
+                type="password"
+                id="password"
+                onChange={inputHandler}
+                name="password"
+                autoComplete="off"
+                placeholder="tucontraseñasegura123"
               />
             </div>
             <div className="inputGroup">
