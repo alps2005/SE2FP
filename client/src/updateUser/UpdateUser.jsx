@@ -9,6 +9,7 @@ const UpdateUser = () => {
   const users = {
     name: "",
     email: "",
+    password: "",
     stateId: "",
     address: "",
   };
@@ -35,9 +36,14 @@ const UpdateUser = () => {
 
   const submitForm = async(e) => {
     e.preventDefault();
-    await axios.put(`http://localhost:8000/api/users/updateUsr/${id}`, user).then((response)=>{toast.success(response.data.message, { position: "top-right" })
+    await axios.put(`http://localhost:8000/api/users/updateUsr/${id}`, user).then((response)=>{toast.success(response.data.message, { position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true, })
 
-    navigate("/");
+    navigate("/usersdisplay");
 
   }).catch((error)=>{
       console.log(error);
@@ -57,7 +63,7 @@ const UpdateUser = () => {
                 onChange={inputHandler}
                 name="name"
                 autoComplete="off"
-                placeholder="Enter your Name"
+                placeholder=""
               />
             </div>
             <div className="inputGroup">
@@ -69,7 +75,19 @@ const UpdateUser = () => {
                 onChange={inputHandler}
                 name="email"
                 autoComplete="off"
-                placeholder="Enter your Email"
+                placeholder=""
+              />
+            </div>
+            <div className="inputGroup">
+              <label htmlFor="password">Contraseña:</label>
+              <input
+                type="password"
+                id="password"
+                value={user.password}
+                onChange={inputHandler}
+                name="password"
+                autoComplete="off"
+                placeholder=""
               />
             </div>
             <div className="inputGroup">
@@ -81,7 +99,7 @@ const UpdateUser = () => {
                 onChange={inputHandler}
                 name="stateId"
                 autoComplete="off"
-                placeholder="xxxxxxx987"
+                placeholder=""
               />
             </div>
             <div className="inputGroup">
@@ -93,7 +111,7 @@ const UpdateUser = () => {
                 onChange={inputHandler}
                 name="address"
                 autoComplete="off"
-                placeholder="Enter your Address"
+                placeholder=""
               />
             </div>
             <div className="inputGroup">
@@ -101,7 +119,7 @@ const UpdateUser = () => {
                 Submit
               </button>
             </div>
-            <Link to="/" type="button" class="btn btn-outline-warning mt-3"><i class="fa-solid fa-circle-arrow-left"></i> Regresar</Link>
+            <Link to="/usersdisplay" type="button" class="btn btn-outline-warning mt-3"><i class="fa-solid fa-circle-arrow-left"></i> Regresar</Link>
           </form>
         </div>
       );

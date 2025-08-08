@@ -7,10 +7,8 @@ import cors from "cors";
 
 const app = express();
 
-// Load environment variables first
 dotenv.config();
 
-// Middleware - order matters!
 app.use(cors({
     origin: 'http://localhost:3000',
     credentials: true
@@ -19,13 +17,7 @@ app.use(cors({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Routes - this is the key fix!
-app.use("/api/users", route);  // Changed from "/api" to "/api/users"
-
-// Test route to verify server is working
-app.get('/test', (req, res) => {
-    res.json({ message: 'Server is working!', port: PORT });
-});
+app.use("/api/users", route);
 
 const PORT = process.env.PORT || 8000;
 const MONGO_URL = process.env.MONGO_URL;

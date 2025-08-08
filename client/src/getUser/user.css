@@ -1,5 +1,5 @@
 .userTable {
-    width: 50%;
+    width: 80%;
     margin: 50px auto;
     display: block;
     backdrop-filter: blur(15px);
@@ -7,7 +7,15 @@
     padding: 30px;
     border-radius: 30px;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.065);
-    
+}
+
+.userTable h3{
+    color: #f5f5f5;
+    text-align: center;
+}
+
+.userTable p{
+    color: #f5f5f5;
 }
 
 .userTable table {
@@ -35,6 +43,7 @@
 
 .userTable table tbody tr:last-child td {
     border-bottom: none !important;
+    
 }
 
 .userTable table thead th {
@@ -74,9 +83,7 @@
     margin-top: 40px;
     text-align: center;
 }
-.btnexit {
-    margin-left: 62%;
-}
+
 .btn:hover {
     color: #f5f5f5;
 }

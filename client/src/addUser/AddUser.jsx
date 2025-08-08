@@ -26,18 +26,32 @@ const AddUser = () => {
   const submitForm = async(e) => {
     e.preventDefault();
     
-    // Check if any field is empty
     if (!user.name.trim() || !user.email.trim() || !user.stateId.trim() || !user.address.trim()) {
-      toast.error("Todos los campos son obligatorios!", { position: "top-right" });
+      toast.error("Todos los campos son obligatorios!", { position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true, });
       return;
     }
 
     await axios.post("http://localhost:8000/api/users/createUsr", user).then((res)=>{
-      toast.success(res.data.message, { position: "top-right" });
-      navigate("/");
+      toast.success(res.data.message, { position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true, });
+      navigate("/usersdisplay");
     }).catch((error)=>{
       console.log(error);
-      toast.error("Error al crear usuario", { position: "top-right" });
+      toast.error("Error al crear usuario", { position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true, });
     });
   }
 
@@ -106,7 +120,7 @@ const AddUser = () => {
               </button>
             </div>
           </form>
-          <Link to="/" type="button" class="btn btn-outline-warning mt-3"><i class="fa-solid fa-circle-arrow-left"></i> Regresar</Link>
+          <Link to="/usersdisplay" type="button" class="btn btn-outline-warning mt-3"><i class="fa-solid fa-circle-arrow-left"></i> Regresar</Link>
         </div>
       );
 };

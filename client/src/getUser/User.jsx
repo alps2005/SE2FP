@@ -1,12 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import './user.css'
 import axios from 'axios'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from 'react-hot-toast';
 import "@fontsource/jetbrains-mono";
 
 const User = () => {
   const [users, setUsers] = useState([])
+  const navigate = useNavigate();
+
+  // Check if user is authenticated
+  useEffect(() => {
+    const user = localStorage.getItem('user');
+    if (!user) {
+      navigate('/login');
+      return;
+    }
+  }, [navigate]);
+
   useEffect(()=>{
     const fetchData = async() =>{
       try {
@@ -23,7 +34,7 @@ const User = () => {
   
   const deleteUser = async(userId) => {
     await axios
-      .delete(`http://localhost:8000/api/deleteUsr/${userId}`)
+      .delete(`http://localhost:8000/api/users/deleteUsr/${userId}`)
       .then((response) => {
         setUsers((prevUser) => prevUser.filter(user => user._id !== userId));
         toast.success(response.data.message, { position: "top-right" });
@@ -33,10 +44,19 @@ const User = () => {
       });
   }
 
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    toast.success('Sesión cerrada exitosamente', { position: "top-right" });
+    navigate('/');
+  }
+
   return (
     <div className='userTable'>
-      <Link to="/addNewUser" type="button" class="btn btn-success">Agregar usuario <i class="fa-solid fa-user-plus"></i></Link>
-      <Link to="/login" type="button" class="btn btnexit btn-outline-danger">Salir <i class="fa-solid fa-user-plus"></i></Link>
+      <div><h3>Dashboard</h3></div>
+      <div class="container d-flex justify-content-center gap-3">
+        <Link to="/addNewUser" type="button" class="btn btn-success">Resgistrar nuevo usuario <i class="fa-solid fa-user-plus"></i></Link>
+        <button onClick={handleLogout} type="button" class="btn btnexit btn-outline-danger">Cerrar sesion <i class="fa-solid fa-sign-out-alt"></i></button>
+      </div>
       
       {users.length === 0?(
         <div className='noData'>
@@ -64,9 +84,9 @@ const User = () => {
                 <td>{user.stateId}</td>
                 <td>{user.address}</td>
                 <td>
-                  <Link to={`/updateUser/${user._id}`} type="button" class="btn btnfile btn-outline-warning">
+                  <Link to={`/updateUser/${user._id}`} type="button" class="btn mb-4 btn-outline-warning">
                     <i class="fa-solid fa-file-pen"></i>
-                  </Link> <Link type="button" onClick={()=>deleteUser(user._id)} class="btn btn-outline-danger">
+                  </Link> <Link type="button" onClick={()=>deleteUser(user._id)} class="btn mb-4 btn-outline-danger">
                     <i class="fa-solid fa-trash-can"></i>
                   </Link>
                 </td>

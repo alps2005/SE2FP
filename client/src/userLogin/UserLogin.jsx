@@ -30,35 +30,61 @@ const UserLogin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Enhanced validation
+    if (!formData.email.trim()) {
+      toast.error("El correo electrónico es obligatorio!", { position: "top-right" });
+      return;
+    }
+
+    if (!formData.password.trim()) {
+      toast.error("La contraseña es obligatoria!", { position: "top-right" });
+      return;
+    }
+
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email.trim())) {
+      toast.error("Por favor ingrese un correo electrónico válido!", { position: "top-right" });
+      return;
+    }
+    
     setLoading(true);
 
     try {
       console.log('Attempting to login with:', { email: formData.email });
       
-      const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
-      const response = await axios.post(`${API_URL}/api/users/login`, formData, {
+      const response = await axios.post(`http://localhost:8000/api/users/login`, {
+        email: formData.email.trim(),
+        password: formData.password
+      }, {
         headers: {
           'Content-Type': 'application/json',
-        }
+        },
+        timeout: 10000
       });
 
       console.log('Login response:', response.data);
 
-      // Store user data in localStorage
-      localStorage.setItem('user', JSON.stringify(response.data.user));
-      
-      // Show success toast
-      toast.success('¡Login exitoso!', {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      if (response.data.user) {
+        // Store user data in localStorage
+        localStorage.setItem('user', JSON.stringify(response.data.user));
+        
+        // Show success toast
+        toast.success('¡Login exitoso!', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
 
-      // Redirect to home page
-      navigate('/');
+        // Redirect to home page
+        navigate('/usersdisplay');
+      } else {
+        throw new Error('Respuesta del servidor inválida');
+      }
       
     } catch (error) {
       console.error('Login error:', error);
@@ -67,10 +93,21 @@ const UserLogin = () => {
       
       if (error.response) {
         // Server responded with error status
-        errorMessage = error.response.data?.message || `Error ${error.response.status}`;
+        const status = error.response.status;
+        if (status === 401) {
+          errorMessage = 'Credenciales inválidas. Verifique su correo y contraseña.';
+        } else if (status === 400) {
+          errorMessage = error.response.data?.message || 'Datos de entrada inválidos.';
+        } else if (status === 500) {
+          errorMessage = 'Error interno del servidor. Intente más tarde.';
+        } else {
+          errorMessage = error.response.data?.message || `Error ${status}`;
+        }
+      } else if (error.code === 'ECONNABORTED') {
+        errorMessage = 'Tiempo de espera agotado. Verifique su conexión.';
       } else if (error.request) {
         // Request was made but no response received
-        errorMessage = 'No se puede conectar al servidor. Verifique que esté ejecutándose.';
+        errorMessage = 'No se puede conectar al servidor. Verifique que esté ejecutándose en el puerto 8000.';
       }
       
       // Show error toast
@@ -99,7 +136,8 @@ const UserLogin = () => {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            autoComplete="off"
+            autoComplete="email"
+            placeholder="ejemplo@correo.com"
             required
           />
         </div>
@@ -111,7 +149,8 @@ const UserLogin = () => {
             name="password"
             value={formData.password}
             onChange={handleChange}
-            autoComplete="off"
+            autoComplete="current-password"
+            placeholder="Ingrese su contraseña"
             required
           />
         </div>

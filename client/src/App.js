@@ -10,19 +10,19 @@ function App() {
   const route = createBrowserRouter([
     {
       path: "/",
-      element: <User />,
+      element: <UserLogin/>,
+    },
+    {
+      path: "/usersdisplay",
+      element: <User/>,
     },
     {
       path: "/addNewUser",
-      element: <AddUser />,
+      element: <AddUser/>,
     },
     {
       path: "/updateUser/:id",
       element: <UpdateUser/>,
-    },
-    {
-      path: "/login",
-      element: <UserLogin/>,
     },
     {
       path: "/register", // This should match the Link in UserLogin

@@ -106,21 +106,39 @@ export const userLogin = async(req, res) => {
     try {
         console.log('Login request received');
         console.log('Request body:', req.body);
-        console.log('Request headers:', req.headers);
         
         const { email, password } = req.body;
 
+        // Validate input
         if (!email || !password) {
             console.log('Missing email or password');
-            return res.status(400).json({ message: "Email y contraseña son requeridos." });
+            return res.status(400).json({ 
+                message: "Email y contraseña son requeridos.",
+                details: {
+                    email: !email ? "Email es requerido" : null,
+                    password: !password ? "Contraseña es requerida" : null
+                }
+            });
         }
 
-        console.log('Looking for user with email:', email);
-        const user = await User.findOne({ email });
+        // Trim and validate email format
+        const trimmedEmail = email.trim().toLowerCase();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(trimmedEmail)) {
+            return res.status(400).json({ 
+                message: "Formato de email inválido." 
+            });
+        }
+
+        console.log('Looking for user with email:', trimmedEmail);
+        const user = await User.findOne({ email: trimmedEmail });
 
         if (!user) {
             console.log('User not found');
-            return res.status(401).json({ message: "Credenciales inválidas." });
+            return res.status(401).json({ 
+                message: "Credenciales inválidas.",
+                hint: "Verifique su correo electrónico y contraseña."
+            });
         }
 
         console.log('User found, checking password');
@@ -129,10 +147,13 @@ export const userLogin = async(req, res) => {
 
         if (!isPasswordValid) {
             console.log('Password invalid');
-            return res.status(401).json({ message: "Credenciales inválidas." });
+            return res.status(401).json({ 
+                message: "Credenciales inválidas.",
+                hint: "Verifique su correo electrónico y contraseña."
+            });
         }
 
-        console.log('Login successful');
+        console.log('Login successful for user:', user.name);
         res.status(200).json({ 
             message: "Login exitoso.",
             user: {
@@ -144,6 +165,9 @@ export const userLogin = async(req, res) => {
 
     } catch (error) {
         console.error('Login error:', error);
-        res.status(500).json({ errorMessage: error.message });
+        res.status(500).json({ 
+            errorMessage: "Error interno del servidor. Intente más tarde.",
+            details: error.message 
+        });
     }
 }
