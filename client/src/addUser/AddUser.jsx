@@ -120,7 +120,7 @@ const AddUser = () => {
               </button>
             </div>
           </form>
-          <Link to="/usersdisplay" type="button" class="btn btn-outline-warning mt-3"><i class="fa-solid fa-circle-arrow-left"></i> Regresar</Link>
+          <Link to="/" type="button" class="btn btn-outline-warning mt-3"><i class="fa-solid fa-circle-arrow-left"></i> Regresar</Link>
         </div>
       );
 };
