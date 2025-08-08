@@ -25,7 +25,7 @@ function App() {
       element: <UpdateUser/>,
     },
     {
-      path: "/register", // This should match the Link in UserLogin
+      path: "/userSignIn", // This should match the Link in UserLogin
       element: <UserSignin/>,
     },
   ])
