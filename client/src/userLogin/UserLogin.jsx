@@ -162,7 +162,7 @@ const UserLogin = () => {
           >
             {loading ? 'Ingresando...' : 'Ingresar'}
           </button>
-          <Link to="/register" className="btn btn-outline-warning mt-3">Registrarse</Link>
+          <Link to="/userSignIn" className="btn btn-outline-warning mt-3">Registrarse</Link>
         </div>
       </form>
     </div>
