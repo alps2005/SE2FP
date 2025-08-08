@@ -2,7 +2,7 @@
     background-color: white;
     width: 25%;
     margin: 50px auto;
-    padding: 40px;
+    padding: 50px;
     border-radius: 5px;
     box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
   }
@@ -13,7 +13,7 @@
   }
   
   .addUserForm .inputGroup label {
-    margin-top: 5px;
+    margin-top: 15px;
   }
   
   .addUserForm .inputGroup input {
@@ -21,10 +21,10 @@
     padding: 10px;
   }
   .addUserForm .inputGroup button {
-    margin-top: 8px;
+    margin-top: 30px;
   }
   .addUser h3 {
-    margin-top: 30px;
+    margin-top: 5px;
     text-align: center;
     font-weight: bold;
     color: darkcyan;
