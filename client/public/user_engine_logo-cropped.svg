@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="15 10.5 160.01 50.55">
+  <defs>
+    <linearGradient id="engineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#1E40AF;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="userGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10B981;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#059669;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Engine gear icon -->
+  <g transform="translate(10, 15)">
+    <circle cx="25" cy="25" r="20" fill="url(#engineGradient)" opacity="0.1"/>
+    <path d="M25 5 L30 10 L35 8 L38 13 L43 15 L40 20 L45 25 L40 30 L43 35 L38 37 L35 42 L30 40 L25 45 L20 40 L15 42 L12 37 L7 35 L10 30 L5 25 L10 20 L7 15 L12 13 L15 8 L20 10 Z" fill="url(#engineGradient)"/>
+    <circle cx="25" cy="25" r="8" fill="white"/>
+    <circle cx="25" cy="25" r="4" fill="url(#engineGradient)"/>
+  </g>
+  
+  <!-- User icons -->
+  <g transform="translate(15, 20)">
+    <!-- User 1 -->
+    <circle cx="45" cy="10" r="4" fill="url(#userGradient)"/>
+    <path d="M45 18 C42 18 40 16 40 14 L50 14 C50 16 48 18 45 18 Z" fill="url(#userGradient)"/>
+    
+    <!-- User 2 -->
+    <circle cx="55" cy="15" r="3.5" fill="url(#userGradient)" opacity="0.8"/>
+    <path d="M55 22 C52.5 22 51 20.5 51 18.5 L59 18.5 C59 20.5 57.5 22 55 22 Z" fill="url(#userGradient)" opacity="0.8"/>
+    
+    <!-- User 3 -->
+    <circle cx="35" cy="15" r="3.5" fill="url(#userGradient)" opacity="0.8"/>
+    <path d="M35 22 C32.5 22 31 20.5 31 18.5 L39 18.5 C39 20.5 37.5 22 35 22 Z" fill="url(#userGradient)" opacity="0.8"/>
+  </g>
+  
+  <!-- Connection lines -->
+  <g stroke="url(#engineGradient)" stroke-width="2" opacity="0.6" fill="none">
+    <line x1="45" y1="40" x2="60" y2="30" stroke-dasharray="3,3"/>
+    <line x1="45" y1="40" x2="70" y2="35" stroke-dasharray="3,3"/>
+    <line x1="45" y1="40" x2="50" y2="35" stroke-dasharray="3,3"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="95" y="32" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1F2937">User</text>
+  <text x="95" y="56" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="url(#engineGradient)">Engine</text>
+  
+  <!-- Subtle accent -->
+  <rect x="95" y="38" width="80" height="2" fill="url(#userGradient)" opacity="0.3"/>
+</svg>

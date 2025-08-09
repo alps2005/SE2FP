@@ -54,72 +54,30 @@ const UpdateUser = () => {
         <div className="updateUser">
           <form className="updateUserForm" onSubmit={submitForm}>
             <h3>Actualizar Usuario</h3>
-            <div className="inputGroup">
-              <label htmlFor="name">Nombre:</label>
-              <input
-                type="text"
-                id="name"
-                value={user.name}
-                onChange={inputHandler}
-                name="name"
-                autoComplete="off"
-                placeholder=""
-              />
+            <div className="input-group mb-3">
+              <span htmlFor="name" class="input-group-text" id="basic-addon1"><i class="fa-solid fa-at"/></span>
+              <input type="text" id="name" value={user.name} onChange={inputHandler} name="name" autoComplete="off" placeholder="" class="form-control"/>
+            </div>
+            <div className="input-group mb-3">
+              <span htmlFor="email" class="input-group-text" id="basic-addon1"><i class="fa-solid fa-envelope"/></span>
+              <input type="email" id="email" value={user.email} onChange={inputHandler} name="email" autoComplete="off" placeholder="" class="form-control"/>
+            </div>
+            <div className="input-group mb-3">
+              <span htmlFor="password" class="input-group-text" id="basic-addon1"><i class="fa-solid fa-lock"/></span>
+              <input type="password" id="password" value={user.password} onChange={inputHandler} name="password" autoComplete="off" placeholder=""  class="form-control"/>
+            </div>
+            <div className="input-group mb-3">
+              <span htmlFor="stateId" class="input-group-text" id="basic-addon1"><i class="fa-solid fa-id-card"/></span>
+              <input type="text" id="stateId" value={user.stateId} onChange={inputHandler} name="stateId" autoComplete="off" placeholder=""  class="form-control"/>
+            </div>
+            <div className="input-group mb-3">
+              <span htmlFor="address" class="input-group-text" id="basic-addon1"><i class="fa-solid fa-map-location-dot"/></span>
+              <input type="text" id="address" value={user.address} onChange={inputHandler} name="address" autoComplete="off" placeholder="" class="form-control"/>
             </div>
             <div className="inputGroup">
-              <label htmlFor="email">Correo electronico:</label>
-              <input
-                type="email"
-                id="email"
-                value={user.email}
-                onChange={inputHandler}
-                name="email"
-                autoComplete="off"
-                placeholder=""
-              />
+              <button type="submit" class="btn btn1 btn-warning">Actualizar</button>
             </div>
-            <div className="inputGroup">
-              <label htmlFor="password">Contraseña:</label>
-              <input
-                type="password"
-                id="password"
-                value={user.password}
-                onChange={inputHandler}
-                name="password"
-                autoComplete="off"
-                placeholder=""
-              />
-            </div>
-            <div className="inputGroup">
-              <label htmlFor="stateId">Cedula:</label>
-              <input
-                type="text"
-                id="stateId"
-                value={user.stateId}
-                onChange={inputHandler}
-                name="stateId"
-                autoComplete="off"
-                placeholder=""
-              />
-            </div>
-            <div className="inputGroup">
-              <label htmlFor="address">Dirección:</label>
-              <input
-                type="text"
-                id="address"
-                value={user.address}
-                onChange={inputHandler}
-                name="address"
-                autoComplete="off"
-                placeholder=""
-              />
-            </div>
-            <div className="inputGroup">
-              <button type="submit" class="btn btn-primary">
-                Submit
-              </button>
-            </div>
-            <Link to="/usersdisplay" type="button" class="btn btn-outline-warning mt-3"><i class="fa-solid fa-circle-arrow-left"></i> Regresar</Link>
+            <Link to="/usersdisplay" type="button" class="btn btn-outline-danger mt-3"><i class="fa-solid fa-circle-arrow-left"></i> Regresar</Link>
           </form>
         </div>
       );

@@ -59,68 +59,32 @@ const AddUser = () => {
         <div className="addUser">
           <h3>Agregar un nuevo usuario</h3>
           <form className="addUserForm" onSubmit={submitForm}>
-            <div className="inputGroup">
-              <label htmlFor="name">Nombre:</label>
-              <input
-                type="text"
-                id="name"
-                onChange={inputHandler}
-                name="name"
-                autoComplete="off"
-                placeholder="Ingresar nombre completo"
+            <div className="input-group mt-4 mb-3">
+              <span htmlFor="name" class="input-group-text" id="basic-addon1"><i class="fa-solid fa-at"/></span>
+              <input type="text" id="name" onChange={inputHandler} name="name" autoComplete="off" placeholder="Ingresar nombre completo" class="form-control"/>
+            </div>
+            <div className="input-group mb-3">
+              <span htmlFor="email" class="input-group-text" id="basic-addon1"><i class="fa-solid fa-envelope"/></span>
+              <input type="email" id="email" onChange={inputHandler} name="email" autoComplete="off" placeholder="nombre@ejemplo.com" class="form-control"/>
+            </div>
+            <div className="input-group mb-3">
+              <span htmlFor="password" class="input-group-text" id="basic-addon1"><i class="fa-solid fa-lock"/></span>
+              <input type="password" id="password" onChange={inputHandler} name="password" autoComplete="off" placeholder="tucontraseñasegura123" class="form-control"/>
+            </div>
+            <div className="input-group mb-3">
+              <span htmlFor="text" class="input-group-text" id="basic-addon1"><i class="fa-solid fa-id-card"/></span>
+              <input type="text" id="stateId" onChange={inputHandler} name="stateId" autoComplete="off" placeholder="xxxxxxx987" class="form-control"
               />
             </div>
-            <div className="inputGroup">
-              <label htmlFor="email">Correo electronico:</label>
-              <input
-                type="email"
-                id="email"
-                onChange={inputHandler}
-                name="email"
-                autoComplete="off"
-                placeholder="nombre@ejemplo.com"
-              />
+            <div className="input-group mb-3">
+              <span htmlFor="text" class="input-group-text" id="basic-addon1"><i class="fa-solid fa-map-location-dot"/></span>
+              <input type="text" id="address" onChange={inputHandler} name="address" autoComplete="off" placeholder="Calle X, Ecuador" class="form-control"/>
             </div>
             <div className="inputGroup">
-              <label htmlFor="password">Contraseña:</label>
-              <input
-                type="password"
-                id="password"
-                onChange={inputHandler}
-                name="password"
-                autoComplete="off"
-                placeholder="tucontraseñasegura123"
-              />
-            </div>
-            <div className="inputGroup">
-              <label htmlFor="address">Cedula:</label>
-              <input
-                type="text"
-                id="stateId"
-                onChange={inputHandler}
-                name="stateId"
-                autoComplete="off"
-                placeholder="xxxxxxx987"
-              />
-            </div>
-            <div className="inputGroup">
-              <label htmlFor="address">Dirección:</label>
-              <input
-                type="text"
-                id="address"
-                onChange={inputHandler}
-                name="address"
-                autoComplete="off"
-                placeholder="Calle X, Ecuador"
-              />
-            </div>
-            <div className="inputGroup">
-              <button type="submit" class="btn btn-primary">
-                Submit
-              </button>
+              <button type="submit" class="btn btn-success mt-2">Agregar</button>
             </div>
           </form>
-          <Link to="/" type="button" class="btn btn-outline-warning mt-3"><i class="fa-solid fa-circle-arrow-left"></i> Regresar</Link>
+          <Link to="/usersdisplay" type="button" class="btn btn-outline-danger mt-3"><i class="fa-solid fa-circle-arrow-left"></i> Regresar</Link>
         </div>
       );
 };

@@ -3,3 +3,13 @@ body {
   font-family: "JetBrains Mono";
   background-image: url('../public/appbg.jpg');
 }
+
+/* Global button hover styles for the entire application */
+.btn {
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}

@@ -7,9 +7,10 @@ import "@fontsource/jetbrains-mono";
 
 const User = () => {
   const [users, setUsers] = useState([])
+  const [searchTerm, setSearchTerm] = useState('')
+  const [filteredUsers, setFilteredUsers] = useState([])
   const navigate = useNavigate();
 
-  // Check if user is authenticated
   useEffect(() => {
     const user = localStorage.getItem('user');
     if (!user) {
@@ -21,16 +22,30 @@ const User = () => {
   useEffect(()=>{
     const fetchData = async() =>{
       try {
-        
         const res = await axios.get('http://localhost:8000/api/users/getAllUsrs');
         setUsers(res.data)
-
+        setFilteredUsers(res.data) // Initialize filtered users
       } catch (error) {
         console.log("Error al recuperar los datos.",error);
       }
     };
     fetchData();
-  },[]);//this is used to ensure the fetch runs only once.
+  },[]);
+
+  // Filter users based on search term
+  useEffect(() => {
+    if (searchTerm === '') {
+      setFilteredUsers(users);
+    } else {
+      const filtered = users.filter(user => 
+        user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.stateId.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.address.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredUsers(filtered);
+    }
+  }, [searchTerm, users]);
   
   const deleteUser = async(userId) => {
     await axios
@@ -50,52 +65,78 @@ const User = () => {
     navigate('/');
   }
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    // Search filtering is handled in the useEffect above
+  }
+
   return (
-    <div className='userTable'>
-      <div><h3>Dashboard</h3></div>
-      <div class="container d-flex justify-content-center gap-3">
-        <Link to="/addNewUser" type="button" class="btn btn-success">Resgistrar nuevo usuario <i class="fa-solid fa-user-plus"></i></Link>
-        <button onClick={handleLogout} type="button" class="btn btnexit btn-outline-danger">Cerrar sesion <i class="fa-solid fa-sign-out-alt"></i></button>
+    <div className='userCard'>
+      <div className="d-flex-co justify-content-between align-items-center mb-2">
+        <h3>Dashboard</h3>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque harum numquam placeat accusamus nesciunt laborum amet neque quos enim dolorum sequi, voluptas, earum soluta quaerat. Similique nihil accusamus totam facilis?</p>
+      </div>
+
+      <div className="container d-flex justify-content-center gap-3 mb-3">
+        <Link to="/addNewUser" type="button" className="btn btn-outline-success btn">Registrar nuevo usuario <i className="fa-solid fa-user-plus"></i></Link>
+        <button onClick={handleLogout} type="button" className="btn btnexit btn-outline-danger">Cerrar sesión <i className="fa-solid fa-sign-out-alt"></i></button>
       </div>
       
-      {users.length === 0?(
+      <div className="container d-flex justify-content-center mb-4">
+        <form onSubmit={handleSearch} className="custom-search-wrapper" role="search" aria-label="Buscar usuarios">
+          <input 
+            className="custom-search-input" 
+            type="search" 
+            placeholder="Buscar usuarios..." 
+            aria-label="Search"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <button className="custom-search-btn" type="submit" aria-label="Buscar">
+            <i className="fa-solid fa-search" aria-hidden="true"></i>
+          </button>
+        </form>
+      </div>
+
+      {filteredUsers.length === 0 && users.length > 0 ? (
+        <div className='noData'>
+          <h3>No se encontraron resultados</h3>
+          <p>Intenta con otros términos de búsqueda</p>
+        </div>
+      ) : filteredUsers.length === 0 ? (
         <div className='noData'>
           <h3>No existen datos que mostrar</h3>
-          <p>Resgistra un nuevo usuario</p>
+          <p>Registra un nuevo usuario</p>
         </div>
-      ):(<table className='table table-bordered'>
-        <thead>
-          <tr>
-            <th scope="col">No.</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Email</th>
-            <th scope="col">Cédula</th>
-            <th scope="col">Dirección</th>
-            <th scope="col">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user, index)=>{
-            return (
-              <tr>
-                <td>{index+1}</td>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.stateId}</td>
-                <td>{user.address}</td>
-                <td>
-                  <Link to={`/updateUser/${user._id}`} type="button" class="btn mb-4 btn-outline-warning">
-                    <i class="fa-solid fa-file-pen"></i>
-                  </Link> <Link type="button" onClick={()=>deleteUser(user._id)} class="btn mb-4 btn-outline-danger">
-                    <i class="fa-solid fa-trash-can"></i>
-                  </Link>
-                </td>
-              </tr>
-            )
-          })}
-          
-        </tbody>
-      </table>)}
+      ) : (
+        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-4">
+          {filteredUsers.map((user, index) => (
+            <div key={user._id} className="col">
+              <div className="card h-100 shadow">
+                <div className="card-body">
+                  <h5 className="card-title">{user.name}</h5>
+                  <p className="card-text">
+                    <strong>Email:</strong> {user.email}<br/>
+                    <strong>Cédula:</strong> {user.stateId}<br/>
+                    <strong>Dirección:</strong> {user.address}
+                  </p>
+                </div>
+                <ul className="list-group list-group-flush">
+                  <li className="list-group-item">
+                    <strong>ID:</strong> {user._id}
+                  </li>
+                </ul>
+                <div className="card-body">
+                  <div className="d-flex gap-2">
+                    <Link to={`/updateUser/${user._id}`} className="btn btn-outline-warning btn-sm"><i className="fa-solid fa-file-pen"></i> Editar</Link>
+                    <button onClick={() => deleteUser(user._id)} className="btn btn-outline-danger btn-sm"><i className="fa-solid fa-trash-can"></i> Eliminar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 };

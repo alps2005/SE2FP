@@ -47,7 +47,7 @@ const UserSignin = () => {
       navigate('/');
     }).catch((error)=>{
       console.log(error);
-      toast.error("Error al crear usuario", { position: "top-right",
+      toast.error("Esta direccion de correo ya esta en uso", { position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,

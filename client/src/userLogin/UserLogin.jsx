@@ -128,30 +128,13 @@ const UserLogin = () => {
     <div className="userLogin">
       <img src="/user_engine_logo.svg" alt="User Engine Logo" className="logo"/>
       <form className="addLoginForm" onSubmit={handleSubmit}>
-        <div className="inputGroup">
-          <label htmlFor="email">Correo electrónico:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            autoComplete="email"
-            placeholder="ejemplo@correo.com"
-            required
-          />
+        <div class="input-group mb-3">
+            <span htmlFor="email" class="input-group-text" id="basic-addon1"><i class="fa-solid fa-envelope"/></span>
+            <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} autoComplete="email" placeholder="" required class="form-control"/>
         </div>
-        <div className="inputGroup">
-          <label htmlFor="password">Contraseña:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            autoComplete="current-password"
-            placeholder="Ingrese su contraseña"
-            required
+        <div className="input-group mb-3">
+        <span htmlFor="password" class="input-group-text" id="basic-addon1"><i class="fa-solid fa-key"></i></span>
+          <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} autoComplete="current-password" placeholder="" required class="form-control"
           />
         </div>
         <div className="inputGroup">
@@ -162,7 +145,7 @@ const UserLogin = () => {
           >
             {loading ? 'Ingresando...' : 'Ingresar'}
           </button>
-          <Link to="/userSignIn" className="btn btn-outline-warning mt-3">Registrarse</Link>
+          <Link to="/userSignIn" className="btn btn-outline-success mt-3">Registrarse</Link>
         </div>
       </form>
     </div>
