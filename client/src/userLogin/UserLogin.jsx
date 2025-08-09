@@ -12,7 +12,6 @@ const UserLogin = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // Check if user is already logged in
   useEffect(() => {
     const user = localStorage.getItem('user');
     if (user) {
@@ -31,7 +30,6 @@ const UserLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Enhanced validation
     if (!formData.email.trim()) {
       toast.error("El correo electrónico es obligatorio!", { position: "top-right" });
       return;
@@ -42,7 +40,6 @@ const UserLogin = () => {
       return;
     }
 
-    // Basic email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email.trim())) {
       toast.error("Por favor ingrese un correo electrónico válido!", { position: "top-right" });
@@ -67,10 +64,8 @@ const UserLogin = () => {
       console.log('Login response:', response.data);
 
       if (response.data.user) {
-        // Store user data in localStorage
         localStorage.setItem('user', JSON.stringify(response.data.user));
         
-        // Show success toast
         toast.success('¡Login exitoso!', {
           position: "top-right",
           autoClose: 5000,
@@ -80,7 +75,6 @@ const UserLogin = () => {
           draggable: true,
         });
 
-        // Redirect to home page
         navigate('/usersdisplay');
       } else {
         throw new Error('Respuesta del servidor inválida');
@@ -92,7 +86,6 @@ const UserLogin = () => {
       let errorMessage = 'Error de conexión. Intente nuevamente.';
       
       if (error.response) {
-        // Server responded with error status
         const status = error.response.status;
         if (status === 401) {
           errorMessage = 'Credenciales inválidas. Verifique su correo y contraseña.';
@@ -106,11 +99,9 @@ const UserLogin = () => {
       } else if (error.code === 'ECONNABORTED') {
         errorMessage = 'Tiempo de espera agotado. Verifique su conexión.';
       } else if (error.request) {
-        // Request was made but no response received
         errorMessage = 'No se puede conectar al servidor. Verifique que esté ejecutándose en el puerto 8000.';
       }
       
-      // Show error toast
       toast.error(errorMessage, {
         position: "top-right",
         autoClose: 5000,

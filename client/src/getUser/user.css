@@ -26,7 +26,6 @@ text {
     color: #000000;
 }
 
-/* Card Styles */
 .userCard .card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid rgba(0, 0, 0, 0.125);
@@ -82,7 +81,6 @@ text {
     color: #000000;
 }
 
-/* Global button hover styles */
 .btn {
     transition: all 0.3s ease;
 }
@@ -92,6 +90,8 @@ text {
     color: #ffffff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+/* This part was generated with cloude and chatgpt  i was having a hard time. i hate css but i love what it does.*/
 
 /* Responsive design for cards */
 @media (max-width: 768px) {
@@ -114,10 +114,10 @@ text {
     width: 20px;
 }
 
-/* ------------------------------
+/*
    Custom Search (isolated)
    Only targets search bar + button inside .userCard
-   ------------------------------ */
+*/
 
 /* Wrapper sits centered by the existing container; keep it inline so it doesn't stretch full width */
 .userCard .custom-search-wrapper {

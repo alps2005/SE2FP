@@ -68,7 +68,6 @@ export const updateUsr = async(req, res) => {
             return res.status(404).json({message: "Usuario no existente."});
         }
 
-        // If password is being updated, hash it
         if (req.body.password) {
             const saltRounds = 10;
             req.body.password = await bcrypt.hash(req.body.password, saltRounds);
@@ -109,7 +108,6 @@ export const userLogin = async(req, res) => {
         
         const { email, password } = req.body;
 
-        // Validate input
         if (!email || !password) {
             console.log('Missing email or password');
             return res.status(400).json({ 
@@ -121,7 +119,6 @@ export const userLogin = async(req, res) => {
             });
         }
 
-        // Trim and validate email format
         const trimmedEmail = email.trim().toLowerCase();
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(trimmedEmail)) {
@@ -142,7 +139,6 @@ export const userLogin = async(req, res) => {
         }
 
         console.log('User found, checking password');
-        // Compare password with hashed password
         const isPasswordValid = await bcrypt.compare(password, user.password);
 
         if (!isPasswordValid) {

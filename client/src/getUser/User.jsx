@@ -28,7 +28,6 @@ const User = () => {
       const userData = JSON.parse(user);
       setCurrentUser(userData);
       
-      // Get session start time from localStorage or set current time
       const sessionTime = localStorage.getItem('sessionStartTime');
       if (!sessionTime) {
         const now = new Date();
@@ -43,7 +42,6 @@ const User = () => {
     }
   }, [navigate]);
 
-  // Update session duration every second
   useEffect(() => {
     if (!sessionStartTime) return;
 
@@ -66,7 +64,7 @@ const User = () => {
       try {
         const res = await axios.get('http://localhost:8000/api/users/getAllUsrs');
         setUsers(res.data)
-        setFilteredUsers(res.data) // Initialize filtered users
+        setFilteredUsers(res.data)
       } catch (error) {
         console.log("Error al recuperar los datos.",error);
       }
@@ -74,7 +72,6 @@ const User = () => {
     fetchData();
   },[]);
 
-  // Filter users based on search term
   useEffect(() => {
     if (searchTerm === '') {
       setFilteredUsers(users);
@@ -113,7 +110,6 @@ const User = () => {
   };
 
   const deleteUser = async(userId) => {
-    // Check if user is trying to delete their own account
     if (currentUser && (currentUser._id === userId || currentUser.id === userId)) {
       toast.error('NO PUEDES ELIMINAR TUS PROPIOS DATOS EN UNA SESIÓN ACTIVA!', { 
         position: "top-right",
@@ -148,15 +144,11 @@ const User = () => {
       return;
     }
 
-    // Check if the search term looks like an ID (MongoDB ObjectId format)
     const isObjectId = /^[0-9a-fA-F]{24}$/.test(searchTerm.trim());
     
     if (isObjectId) {
-      // Search by ID
       await searchUserById(searchTerm);
     } else {
-      // Regular text search is handled by useEffect
-      // Just ensure the search is active
       if (searchTerm.trim() !== '') {
         const filtered = users.filter(user => 
           user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -169,7 +161,6 @@ const User = () => {
     }
   }
 
-  // Helper function to check if user is the current logged-in user
   const isCurrentUser = (userId) => {
     return currentUser && (currentUser._id === userId || currentUser.id === userId);
   }

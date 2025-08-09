@@ -4,7 +4,6 @@ body {
   background-image: url('../public/appbg.jpg');
 }
 
-/* Global button hover styles for the entire application */
 .btn {
   transition: all 0.3s ease;
 }
