@@ -130,7 +130,7 @@ const UserLogin = () => {
       <form className="addLoginForm" onSubmit={handleSubmit}>
         <div class="input-group mb-3">
             <span htmlFor="email" class="input-group-text" id="basic-addon1"><i class="fa-solid fa-envelope"/></span>
-            <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} autoComplete="email" placeholder="" required class="form-control"/>
+            <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} autoComplete="email" placeholder="ejemplo@gmail.com" required class="form-control"/>
         </div>
         <div className="input-group mb-3">
         <span htmlFor="password" class="input-group-text" id="basic-addon1"><i class="fa-solid fa-key"></i></span>

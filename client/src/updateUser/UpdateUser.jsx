@@ -54,7 +54,7 @@ const UpdateUser = () => {
         <div className="updateUser">
           <form className="updateUserForm" onSubmit={submitForm}>
             <h3>Actualizar Usuario</h3>
-            <div className="input-group mb-3">
+            <div className="input-group mt-4 mb-3">
               <span htmlFor="name" class="input-group-text" id="basic-addon1"><i class="fa-solid fa-at"/></span>
               <input type="text" id="name" value={user.name} onChange={inputHandler} name="name" autoComplete="off" placeholder="" class="form-control"/>
             </div>

@@ -60,62 +60,27 @@ const UserSignin = () => {
         <div className="userSignIn">
           <h3>Ingresa los siguientes datos</h3>
           <form className="userSignInForn" onSubmit={submitForm}>
-            <div className="inputGroup">
-              <label htmlFor="name">Nombre:</label>
-              <input
-                type="text"
-                id="name"
-                onChange={inputHandler}
-                name="name"
-                autoComplete="off"
-                placeholder="Ingresar nombre completo"
-              />
+            <div className="input-group mt-4 mb-3">
+              <span htmlFor="name" class="input-group-text" id="basic-addon1"><i class="fa-solid fa-at"/></span>
+              <input type="text" id="name" onChange={inputHandler} name="name" autoComplete="off" placeholder="nombre completo" class="form-control"/>
             </div>
-            <div className="inputGroup">
-              <label htmlFor="email">Correo electronico:</label>
-              <input
-                type="email"
-                id="email"
-                onChange={inputHandler}
-                name="email"
-                autoComplete="off"
-                placeholder="nombre@ejemplo.com"
-              />
+            <div className="input-group mb-3">
+              <span htmlFor="email" class="input-group-text" id="basic-addon1"><i class="fa-solid fa-envelope"/></span>
+              <input type="email" id="email" onChange={inputHandler} name="email" autoComplete="off" placeholder="correo electronico" class="form-control"/>
             </div>
-            <div className="inputGroup">
-              <label htmlFor="password">Contraseña:</label>
-              <input
-                type="password"
-                id="password"
-                onChange={inputHandler}
-                name="password"
-                autoComplete="off"
-                placeholder="tucontraseñasegura123"
-              />
+            <div className="input-group mb-3">
+              <span htmlFor="password" class="input-group-text" id="basic-addon1"><i class="fa-solid fa-lock"/></span>
+              <input type="password" id="password" onChange={inputHandler} name="password" autoComplete="off" placeholder="tucontraseñasegura123" class="form-control"/>
             </div>
-            <div className="inputGroup">
-              <label htmlFor="address">Cedula:</label>
-              <input
-                type="text"
-                id="stateId"
-                onChange={inputHandler}
-                name="stateId"
-                autoComplete="off"
-                placeholder="xxxxxxx987"
-              />
+            <div className="input-group mb-3">
+              <span htmlFor="address" class="input-group-text" id="basic-addon1"><i class="fa-solid fa-id-card"/></span>
+              <input type="text"id="stateId" onChange={inputHandler} name="stateId" autoComplete="off" placeholder="xxxxxxx987" class="form-control"/>
             </div>
-            <div className="inputGroup">
-              <label htmlFor="address">Dirección:</label>
-              <input
-                type="text"
-                id="address"
-                onChange={inputHandler}
-                name="address"
-                autoComplete="off"
-                placeholder="Calle X, Ecuador"
-              />
+            <div className="input-group mb-3">
+              <span htmlFor="address" class="input-group-text" id="basic-addon1"><i class="fa-solid fa-map-location-dot"/></span>
+              <input type="text" id="address" onChange={inputHandler} name="address" autoComplete="off" placeholder="dirección de vivienda" class="form-control"/>
             </div>
-            <div className="inputGroup">
+            <div className="inputGroup mb-3">
               <button type="submit" class="btn btn-primary">
                 Resgistrarse
               </button>
