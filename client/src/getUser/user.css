@@ -1,3 +1,7 @@
+text {
+    color: rgb(108, 108, 108);
+    text-shadow: 1px 1px 1px rgb(0, 225, 124);
+}
 .userCard {
     width: 80%;
     margin: 50px auto;
@@ -10,8 +14,12 @@
 }
 
 .userCard h3{
-    color: #000000;
+    margin-top: 5px;
     text-align: center;
+    font-weight: bold;
+    color: #000000;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
 
 .userCard p{
@@ -66,12 +74,12 @@
 }
 
 .noData h3 {
-    color: #f5f5f5;
+    color: #000000;
     margin-bottom: 1rem;
 }
 
 .noData p {
-    color: #f5f5f5;
+    color: #000000;
 }
 
 /* Global button hover styles */
@@ -119,7 +127,7 @@
     max-width: 540px; /* control width */
     box-sizing: border-box;
     gap: 0; /* no gap; borders will visually connect */
-    background: transparent;
+    
 }
 
 /* Input: flexible piece that grows to fill space */
@@ -197,5 +205,162 @@
     }
     .userCard .custom-search-btn {
         width: 48px;
+    }
+}
+
+/* ------------------------------
+   Modal Styles
+   ------------------------------ */
+
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1050;
+    padding: 20px;
+}
+
+/* Modal Content */
+.modal-content {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Modal Header */
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 25px 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.modal-title {
+    margin: 0;
+    color: #333;
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.btn-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #6c757d;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.btn-close:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: #333;
+}
+
+/* Modal Body */
+.modal-body {
+    padding: 20px 25px;
+}
+
+.modal-body .card {
+    border: none;
+    box-shadow: none;
+    background: transparent;
+}
+
+.modal-body .card-title {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.modal-body .card-text {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+.modal-body .list-group-item {
+    background-color: rgba(248, 249, 250, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    font-size: 0.9rem;
+    color: #495057;
+}
+
+/* Modal Footer */
+.modal-footer {
+    padding: 15px 25px 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.modal-footer .btn {
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.modal-footer .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive Modal */
+@media (max-width: 576px) {
+    .modal-overlay {
+        padding: 10px;
+    }
+    
+    .modal-content {
+        max-width: 100%;
+        border-radius: 15px;
+    }
+    
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    
+    .modal-title {
+        font-size: 1.1rem;
     }
 }
