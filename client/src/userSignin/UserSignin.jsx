@@ -74,7 +74,7 @@ const UserSignin = () => {
             </div>
             <div className="input-group mb-3">
               <span htmlFor="address" class="input-group-text" id="basic-addon1"><i class="fa-solid fa-id-card"/></span>
-              <input type="text"id="stateId" onChange={inputHandler} name="stateId" autoComplete="off" placeholder="xxxxxxx987" class="form-control"/>
+              <input type="text"id="stateId" onChange={inputHandler} name="stateId" autoComplete="off" placeholder="no. de cedula" class="form-control"/>
             </div>
             <div className="input-group mb-3">
               <span htmlFor="address" class="input-group-text" id="basic-addon1"><i class="fa-solid fa-map-location-dot"/></span>
